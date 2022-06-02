@@ -3,3 +3,4 @@ SQLAlchemy
 Flask-JWT-Extended
 Flask-RESTful
 Flask-SQLAlchemy
+Black

@@ -1,6 +1,4 @@
-from flask_jwt_extended import (
-    jwt_required
-)
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
 
 from models.item import Item
@@ -8,8 +6,12 @@ from models.item import Item
 
 class ItemResource(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument("price", type=float, required=True, help="This field cannot be left blank")
-    parser.add_argument("store_id", type=int, required=True, help="Every item needs a store_id")
+    parser.add_argument(
+        "price", type=float, required=True, help="This field cannot be left blank"
+    )
+    parser.add_argument(
+        "store_id", type=int, required=True, help="Every item needs a store_id"
+    )
 
     def get(self, name: str):
         item = Item.find_by_name(name)
@@ -21,7 +23,9 @@ class ItemResource(Resource):
     @jwt_required(fresh=True)
     def post(self, name: str):
         if Item.find_by_name(name):
-            return {"message": "an item with name '{}' already exists".format(name)}, 400
+            return {
+                "message": "an item with name '{}' already exists".format(name)
+            }, 400
 
         data = ItemResource.parser.parse_args()
         item = Item(name, **data)
