@@ -21,7 +21,8 @@ _user_parser.add_argument(
 
 
 class UserRegister(Resource):
-    def post(self):
+    @classmethod
+    def post(cls):
         data = _user_parser.parse_args()
 
         if User.find_by_username(data["username"]):
@@ -56,7 +57,8 @@ class UserResource(Resource):
 
 
 class UserLogin(Resource):
-    def post(self):
+    @classmethod
+    def post(cls):
         data = _user_parser.parse_args()
 
         user = User.find_by_username(data["username"])
@@ -72,16 +74,18 @@ class UserLogin(Resource):
 
 
 class UserLogout(Resource):
+    @classmethod
     @jwt_required()
-    def post(self):
+    def post(cls):
         jti = get_jwt()["jti"]  # jti is "JWT ID", a unique identifier for a JWT.
         user_id = get_jwt_identity()
         return {"message": "User <id={}> successfully logged out.".format(user_id)}, 200
 
 
 class TokenRefresh(Resource):
+    @classmethod
     @jwt_required(refresh=True)
-    def post(self):
+    def post(cls):
         current_user = get_jwt_identity()
         new_token = create_access_token(identity=current_user, fresh=False)
         return {"access_token": new_token}, 200
