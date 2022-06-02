@@ -28,11 +28,11 @@ class Store(db.Model):
         }
 
     @classmethod
-    def find_by_name(cls, name: str):
+    def find_by_name(cls, name: str) -> "Store":
         return cls.query.filter_by(name=name).first()
 
     @classmethod
-    def find_all(cls) -> List:
+    def find_all(cls) -> List["Store"]:
         return cls.query.all()
 
     def save_to_db(self) -> None:
