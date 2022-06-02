@@ -1,0 +1,15 @@
+.idea
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.installed.cfg
+*.egg
+
+eggs/
+.eggs/
+.venv/
+temp/
+
+.Python
