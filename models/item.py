@@ -1,8 +1,10 @@
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from sqlalchemy.orm import Query
 
 from db import db
+
+ItemJSON = Dict[str, Union[int, str, float]]
 
 
 class Item(db.Model):
@@ -21,7 +23,7 @@ class Item(db.Model):
         self.price = price
         self.store_id = store_id
 
-    def json(self) -> Dict:
+    def json(self) -> ItemJSON:
         return {
             "id": self.id,
             "name": self.name,
