@@ -9,7 +9,6 @@ from flask_jwt_extended import (
     get_jwt,
 )
 from flask_restful import Resource
-from marshmallow import ValidationError
 
 from models.user import User
 from schemas.user import UserSchema
@@ -20,10 +19,7 @@ user_schema = UserSchema()
 class UserRegister(Resource):
     @classmethod
     def post(cls):
-        try:
-            user = user_schema.load(request.get_json())
-        except ValidationError as err:
-            return err.messages, 400
+        user = user_schema.load(request.get_json())
 
         if User.find_by_username(user.username):
             return {"message": "A user with that username already exists."}, 400
@@ -58,11 +54,7 @@ class UserResource(Resource):
 class UserLogin(Resource):
     @classmethod
     def post(cls):
-        try:
-            user_data = user_schema.load(request.get_json())
-        except ValidationError as err:
-            return err.messages, 400
-
+        user_data = user_schema.load(request.get_json())
         user = User.find_by_username(user_data.username)
 
         # this is what the `authenticate()` function did in security.py
