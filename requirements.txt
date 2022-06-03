@@ -1,6 +1,7 @@
-Flask
-SQLAlchemy
-Flask-JWT-Extended
-Flask-RESTful
-Flask-SQLAlchemy
-Black
+flask
+sqlalchemy
+flask-jwt-extended
+flask-restful
+flask-sqlalchemy
+black
+marshmallow

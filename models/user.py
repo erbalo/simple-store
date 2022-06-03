@@ -1,10 +1,6 @@
-from typing import Dict, Union
-
 from sqlalchemy.orm import Query
 
 from db import db
-
-UserJSON = Dict[str, Union[int, str]]
 
 
 class User(db.Model):
@@ -18,9 +14,6 @@ class User(db.Model):
     def __init__(self, username: str, password: str):
         self.username = username
         self.password = password
-
-    def json(self) -> UserJSON:
-        return {"id": self.id, "username": self.username}
 
     @classmethod
     def find_by_username(cls, username: str) -> "User":

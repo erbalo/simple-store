@@ -6,6 +6,7 @@ __pycache__/
 *.egg-info/
 .installed.cfg
 *.egg
+*.db
 
 eggs/
 .eggs/

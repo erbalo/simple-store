@@ -21,11 +21,17 @@ app.secret_key = "erbalo"
 
 api = Api(app)
 
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 jwt = JWTManager(app)
 
 
 @jwt.additional_claims_loader
-def add_clais_to_jwt(identity):
+def add_claims_to_jwt(identity):
     if identity == 1:
         return {"is_admin": True}
     return {"is_admin": False}
