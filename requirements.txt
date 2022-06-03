@@ -5,3 +5,5 @@ flask-restful
 flask-sqlalchemy
 black
 marshmallow
+flask-marshmallow
+marshmallow-sqlalchemy
